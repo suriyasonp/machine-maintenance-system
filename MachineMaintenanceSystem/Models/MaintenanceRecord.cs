@@ -20,6 +20,7 @@ namespace PoCMinimalApiPostgreSQL.Models
         [Required]
         public MaintenanceType Type { get; set; }
 
+        [Required]
 
     }
 }
