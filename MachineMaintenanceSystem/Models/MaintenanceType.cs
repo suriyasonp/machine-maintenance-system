@@ -1,13 +1,16 @@
-﻿public enum MaintenanceType
+﻿namespace MachineMaintenanceSystem.Api.Models
 {
-    Preventive,
-    Corrective,
-    Predictive,
-    Inspection,
-    Overhaul,
-    Lubrication,
-    Cleaning,
-    Calibration,
-    Replacement,
-    Other
+    public enum MaintenanceType
+    {
+        Preventive,
+        Corrective,
+        Predictive,
+        Inspection,
+        Overhaul,
+        Lubrication,
+        Cleaning,
+        Calibration,
+        Replacement,
+        Other
+    }
 }

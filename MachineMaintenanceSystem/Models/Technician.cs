@@ -1,4 +1,4 @@
-﻿namespace PoCMinimalApiPostgreSQL.Models
+﻿namespace MachineMaintenanceSystem.Api.Models
 {
     public class Technician
     {
