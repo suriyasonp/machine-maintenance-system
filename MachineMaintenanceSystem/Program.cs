@@ -67,9 +67,9 @@ app.MapHealthChecks("/health", new HealthCheckOptions
 
 // Register all API endpoints
 app.MapEquipmentEndpoints();
-//app.MapMaintenanceRecordEndpoints();
-//app.MapMaintenanceScheduleEndpoints();
-//app.MapPartsEndpoints();
-//app.MapDowntimeEndpoints();
+app.MapMaintenanceRecordEndpoints();
+app.MapMaintenanceScheduleEndpoints();
+app.MapPartsEndpoints();
+app.MapDowntimeEndpoints();
 
 app.Run();
