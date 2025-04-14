@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MachineMaintenanceSystem.Api.Models.v1;
+using System.ComponentModel.DataAnnotations;
 
-namespace MachineMaintenanceSystem.Api.Models.v1
+namespace MachineMaintenanceSystem.Api.Dtos
 {
-    public class Equipment
+    public class BaseEquipmentDto
     {
-        [Key]
-        public Guid Id { get; set; }
-
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
@@ -15,11 +13,11 @@ namespace MachineMaintenanceSystem.Api.Models.v1
         [StringLength(50)]
         public string SerialNumber { get; set; }
 
-        [Required]
         [StringLength(200)]
         public string Description { get; set; }
 
-        public DateTimeOffset InstallationDate { get; set; }
+        [Required]
+        public DateTime InstallationDate { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -31,12 +29,22 @@ namespace MachineMaintenanceSystem.Api.Models.v1
         [Required]
         public EquipmentType Type { get; set; }
 
-        public DateTimeOffset? LastMaintenanceDate { get; set; }
-
         public string Location { get; set; }
-
-        public bool IsActive { get; set; }
-
-        public ICollection<MaintenanceRecord> MaintenanceRecords { get; set; }
-        public ICollection<MaintenanceSchedule> MaintenanceSchedules { get; set; }
     }
+
+    public class EquipmentDto : BaseEquipmentDto
+    {
+        public Guid Id { get; set; }
+        public DateTimeOffset? LastMaintenanceDate { get; set; }
+        public bool IsActive { get; set; }
+    }
+
+    public class CreateEquipmentDto : BaseEquipmentDto
+    {
+    }
+
+    public class UpdateEquipmentDto : BaseEquipmentDto
+    {
+        public bool IsActive { get; set; }
+    }
+}
