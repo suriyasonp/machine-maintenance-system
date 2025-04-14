@@ -9,7 +9,7 @@ namespace MachineMaintenanceSystem.Api.Models
 
         [Required]
         public Guid PartId { get; set; }
-        
+
         [Required]
         public Guid MaintenanceRecordId { get; set; }
 
@@ -18,8 +18,6 @@ namespace MachineMaintenanceSystem.Api.Models
 
         // Navigation properties
         public Part Part { get; set; }
-        public MaintenanceRecord MaintenanceRecord
-        {
-            get; set;
-        }
+        public MaintenanceRecord MaintenanceRecord { get; set; }
+    }
 }
