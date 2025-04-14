@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MachineMaintenanceSystem.Api.Dtos
 {
-    public abstract class BaseEquipmentDto
+    public abstract class MaintenanceRecordDto
     {
         [Required]
         [StringLength(100)]
@@ -17,7 +17,7 @@ namespace MachineMaintenanceSystem.Api.Dtos
         public string Description { get; set; }
 
         [Required]
-        public DateTime InstallationDate { get; set; }
+        public DateTimeOffset InstallationDate { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -30,21 +30,5 @@ namespace MachineMaintenanceSystem.Api.Dtos
         public EquipmentType Type { get; set; }
 
         public string Location { get; set; }
-    }
-
-    public abstract class EquipmentDto : BaseEquipmentDto
-    {
-        public Guid Id { get; set; }
-        public DateTimeOffset? LastMaintenanceDate { get; set; }
-        public bool IsActive { get; set; }
-    }
-
-    public abstract class CreateEquipmentDto : BaseEquipmentDto
-    {
-    }
-
-    public abstract class UpdateEquipmentDto : BaseEquipmentDto
-    {
-        public bool IsActive { get; set; }
     }
 }

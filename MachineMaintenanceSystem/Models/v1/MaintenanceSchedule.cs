@@ -2,7 +2,7 @@
 
 namespace MachineMaintenanceSystem.Api.Models.v1
 {
-    public class MaintenanceSchedule
+    public class MaintenanceSchedule : BaseModel
     {
         [Key]
         public Guid Id { get; set; }

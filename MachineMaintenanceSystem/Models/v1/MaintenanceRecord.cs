@@ -2,7 +2,7 @@
 
 namespace MachineMaintenanceSystem.Api.Models.v1
 {
-    public class MaintenanceRecord
+    public class MaintenanceRecord : BaseModel
     {
         [Key]
         public Guid Id { get; set; }
@@ -11,7 +11,7 @@ namespace MachineMaintenanceSystem.Api.Models.v1
         public Guid EquipmentId { get; set; }
 
         [Required]
-        public DateTime MaintenanceDate { get; set; }
+        public DateTimeOffset MaintenanceDate { get; set; }
 
         [Required]
         [StringLength(200)]

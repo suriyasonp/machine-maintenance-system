@@ -2,7 +2,7 @@
 
 namespace MachineMaintenanceSystem.Api.Models.v1
 {
-    public class PartUsage
+    public class PartUsage : BaseModel
     {
         [Key]
         public Guid Id { get; set; }

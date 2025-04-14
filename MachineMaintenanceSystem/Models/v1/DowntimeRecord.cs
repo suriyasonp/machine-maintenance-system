@@ -2,7 +2,7 @@
 
 namespace MachineMaintenanceSystem.Api.Models.v1
 {
-    public class DowntimeRecord
+    public class DowntimeRecord : BaseModel
     {
         [Key]
         public Guid Id { get; set; }

@@ -12,6 +12,27 @@ namespace MachineMaintenanceSystem.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "SystemUser",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserName = table.Column<string>(type: "text", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    Role = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    CreatedById = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedById = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SystemUser", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Equipment",
                 columns: table => new
                 {
@@ -25,11 +46,25 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     Type = table.Column<int>(type: "integer", nullable: false),
                     LastMaintenanceDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     Location = table.Column<string>(type: "text", nullable: false),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    CreatedById = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedById = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Equipment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Equipment_SystemUser_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Equipment_SystemUser_UpdatedById",
+                        column: x => x.UpdatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -45,12 +80,24 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     MinimumStockLevel = table.Column<int>(type: "integer", nullable: false),
                     Supplier = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Location = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    CreatedById = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedById = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Parts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Parts_SystemUser_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Parts_SystemUser_UpdatedById",
+                        column: x => x.UpdatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -63,11 +110,25 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     Phone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
                     Specialty = table.Column<int>(type: "integer", nullable: false),
-                    Certifications = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
+                    Certifications = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    CreatedById = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedById = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Technicians", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Technicians_SystemUser_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Technicians_SystemUser_UpdatedById",
+                        column: x => x.UpdatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -83,7 +144,11 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     NextDueDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     EstimatedDuration = table.Column<TimeSpan>(type: "interval", nullable: false),
                     Instructions = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    CreatedById = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedById = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,6 +159,16 @@ namespace MachineMaintenanceSystem.Api.Migrations
                         principalTable: "Equipment",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MaintenanceSchedules_SystemUser_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_MaintenanceSchedules_SystemUser_UpdatedById",
+                        column: x => x.UpdatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -102,7 +177,7 @@ namespace MachineMaintenanceSystem.Api.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     EquipmentId = table.Column<Guid>(type: "uuid", nullable: false),
-                    MaintenanceDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    MaintenanceDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     Description = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
                     TechnicianId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -111,7 +186,11 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     Notes = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     Cost = table.Column<decimal>(type: "numeric(10,2)", precision: 10, scale: 2, nullable: false),
                     IsEmergency = table.Column<bool>(type: "boolean", nullable: false),
-                    IsCompleted = table.Column<bool>(type: "boolean", nullable: false)
+                    IsCompleted = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    CreatedById = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedById = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -122,6 +201,16 @@ namespace MachineMaintenanceSystem.Api.Migrations
                         principalTable: "Equipment",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MaintenanceRecords_SystemUser_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_MaintenanceRecords_SystemUser_UpdatedById",
+                        column: x => x.UpdatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_MaintenanceRecords_Technicians_TechnicianId",
                         column: x => x.TechnicianId,
@@ -140,7 +229,11 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     EndTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     Reason = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
-                    RelatedMaintenanceRecordId = table.Column<Guid>(type: "uuid", nullable: true)
+                    RelatedMaintenanceRecordId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    CreatedById = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedById = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -157,6 +250,16 @@ namespace MachineMaintenanceSystem.Api.Migrations
                         principalTable: "MaintenanceRecords",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_DowntimeRecords_SystemUser_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_DowntimeRecords_SystemUser_UpdatedById",
+                        column: x => x.UpdatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -166,7 +269,11 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     PartId = table.Column<Guid>(type: "uuid", nullable: false),
                     MaintenanceRecordId = table.Column<Guid>(type: "uuid", nullable: false),
-                    QuantityUsed = table.Column<int>(type: "integer", nullable: false)
+                    QuantityUsed = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    CreatedById = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedById = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -183,7 +290,22 @@ namespace MachineMaintenanceSystem.Api.Migrations
                         principalTable: "Parts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PartUsages_SystemUser_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_PartUsages_SystemUser_UpdatedById",
+                        column: x => x.UpdatedById,
+                        principalTable: "SystemUser",
+                        principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DowntimeRecords_CreatedById",
+                table: "DowntimeRecords",
+                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DowntimeRecords_EquipmentId",
@@ -196,9 +318,29 @@ namespace MachineMaintenanceSystem.Api.Migrations
                 column: "RelatedMaintenanceRecordId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DowntimeRecords_UpdatedById",
+                table: "DowntimeRecords",
+                column: "UpdatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Equipment_CreatedById",
+                table: "Equipment",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Equipment_SerialNumber",
                 table: "Equipment",
                 column: "SerialNumber");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Equipment_UpdatedById",
+                table: "Equipment",
+                column: "UpdatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MaintenanceRecords_CreatedById",
+                table: "MaintenanceRecords",
+                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MaintenanceRecords_EquipmentId",
@@ -216,6 +358,16 @@ namespace MachineMaintenanceSystem.Api.Migrations
                 column: "TechnicianId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MaintenanceRecords_UpdatedById",
+                table: "MaintenanceRecords",
+                column: "UpdatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MaintenanceSchedules_CreatedById",
+                table: "MaintenanceSchedules",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MaintenanceSchedules_EquipmentId",
                 table: "MaintenanceSchedules",
                 column: "EquipmentId");
@@ -226,9 +378,29 @@ namespace MachineMaintenanceSystem.Api.Migrations
                 column: "NextDueDate");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MaintenanceSchedules_UpdatedById",
+                table: "MaintenanceSchedules",
+                column: "UpdatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Parts_CreatedById",
+                table: "Parts",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Parts_PartNumber",
                 table: "Parts",
                 column: "PartNumber");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Parts_UpdatedById",
+                table: "Parts",
+                column: "UpdatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PartUsages_CreatedById",
+                table: "PartUsages",
+                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PartUsages_MaintenanceRecordId",
@@ -239,6 +411,21 @@ namespace MachineMaintenanceSystem.Api.Migrations
                 name: "IX_PartUsages_PartId",
                 table: "PartUsages",
                 column: "PartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PartUsages_UpdatedById",
+                table: "PartUsages",
+                column: "UpdatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Technicians_CreatedById",
+                table: "Technicians",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Technicians_UpdatedById",
+                table: "Technicians",
+                column: "UpdatedById");
         }
 
         /// <inheritdoc />
@@ -264,6 +451,9 @@ namespace MachineMaintenanceSystem.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "Technicians");
+
+            migrationBuilder.DropTable(
+                name: "SystemUser");
         }
     }
 }

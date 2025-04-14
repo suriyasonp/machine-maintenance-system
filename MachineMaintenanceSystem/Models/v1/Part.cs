@@ -2,7 +2,7 @@
 
 namespace MachineMaintenanceSystem.Api.Models.v1
 {
-    public class Part
+    public class Part : BaseModel
     {
         [Key]
         public Guid Id { get; set; }
@@ -32,8 +32,6 @@ namespace MachineMaintenanceSystem.Api.Models.v1
         [StringLength(100)]
         public string Location { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
         // Navigation properties
         public ICollection<PartUsage> UsageRecords { get; set; }
     }

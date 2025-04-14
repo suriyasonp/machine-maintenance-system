@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MachineMaintenanceSystem.Api.Migrations
 {
     [DbContext(typeof(MachineMaintenanceDbContext))]
-    [Migration("20250414065649_InitialCreate")]
+    [Migration("20250414122351_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -29,6 +29,12 @@ namespace MachineMaintenanceSystem.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedById")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
@@ -53,11 +59,21 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     b.Property<DateTimeOffset>("StartTime")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedById")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
 
                     b.HasIndex("EquipmentId");
 
                     b.HasIndex("RelatedMaintenanceRecordId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("DowntimeRecords");
                 });
@@ -66,6 +82,12 @@ namespace MachineMaintenanceSystem.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedById")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
@@ -109,9 +131,19 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedById")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedById");
+
                     b.HasIndex("SerialNumber");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Equipment");
                 });
@@ -125,6 +157,12 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     b.Property<decimal>("Cost")
                         .HasPrecision(10, 2)
                         .HasColumnType("numeric(10,2)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -143,7 +181,7 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     b.Property<bool>("IsEmergency")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("MaintenanceDate")
+                    b.Property<DateTimeOffset>("MaintenanceDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Notes")
@@ -159,13 +197,23 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedById")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
 
                     b.HasIndex("EquipmentId");
 
                     b.HasIndex("MaintenanceDate");
 
                     b.HasIndex("TechnicianId");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("MaintenanceRecords");
                 });
@@ -174,6 +222,12 @@ namespace MachineMaintenanceSystem.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedById")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
@@ -207,11 +261,21 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedById")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
 
                     b.HasIndex("EquipmentId");
 
                     b.HasIndex("NextDueDate");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("MaintenanceSchedules");
                 });
@@ -222,8 +286,11 @@ namespace MachineMaintenanceSystem.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -260,12 +327,19 @@ namespace MachineMaintenanceSystem.Api.Migrations
                         .HasPrecision(10, 2)
                         .HasColumnType("numeric(10,2)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedById")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedById");
+
                     b.HasIndex("PartNumber");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Parts");
                 });
@@ -274,6 +348,12 @@ namespace MachineMaintenanceSystem.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedById")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("MaintenanceRecordId")
@@ -285,13 +365,66 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     b.Property<int>("QuantityUsed")
                         .HasColumnType("integer");
 
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedById")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
 
                     b.HasIndex("MaintenanceRecordId");
 
                     b.HasIndex("PartId");
 
+                    b.HasIndex("UpdatedById");
+
                     b.ToTable("PartUsages");
+                });
+
+            modelBuilder.Entity("MachineMaintenanceSystem.Api.Models.v1.SystemUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SystemUser");
                 });
 
             modelBuilder.Entity("MachineMaintenanceSystem.Api.Models.v1.Technician", b =>
@@ -304,6 +437,12 @@ namespace MachineMaintenanceSystem.Api.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedById")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Email")
                         .HasMaxLength(100)
@@ -326,13 +465,27 @@ namespace MachineMaintenanceSystem.Api.Migrations
                     b.Property<int>("Specialty")
                         .HasColumnType("integer");
 
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedById")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Technicians");
                 });
 
             modelBuilder.Entity("MachineMaintenanceSystem.Api.Models.v1.DowntimeRecord", b =>
                 {
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
                     b.HasOne("MachineMaintenanceSystem.Api.Models.v1.Equipment", "Equipment")
                         .WithMany()
                         .HasForeignKey("EquipmentId")
@@ -344,13 +497,40 @@ namespace MachineMaintenanceSystem.Api.Migrations
                         .HasForeignKey("RelatedMaintenanceRecordId")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("CreatedBy");
+
                     b.Navigation("Equipment");
 
                     b.Navigation("RelatedMaintenanceRecord");
+
+                    b.Navigation("UpdatedBy");
+                });
+
+            modelBuilder.Entity("MachineMaintenanceSystem.Api.Models.v1.Equipment", b =>
+                {
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("MachineMaintenanceSystem.Api.Models.v1.MaintenanceRecord", b =>
                 {
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
                     b.HasOne("MachineMaintenanceSystem.Api.Models.v1.Equipment", "Equipment")
                         .WithMany("MaintenanceRecords")
                         .HasForeignKey("EquipmentId")
@@ -363,24 +543,63 @@ namespace MachineMaintenanceSystem.Api.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("CreatedBy");
+
                     b.Navigation("Equipment");
 
                     b.Navigation("Technician");
+
+                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("MachineMaintenanceSystem.Api.Models.v1.MaintenanceSchedule", b =>
                 {
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
                     b.HasOne("MachineMaintenanceSystem.Api.Models.v1.Equipment", "Equipment")
                         .WithMany("MaintenanceSchedules")
                         .HasForeignKey("EquipmentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("CreatedBy");
+
                     b.Navigation("Equipment");
+
+                    b.Navigation("UpdatedBy");
+                });
+
+            modelBuilder.Entity("MachineMaintenanceSystem.Api.Models.v1.Part", b =>
+                {
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("MachineMaintenanceSystem.Api.Models.v1.PartUsage", b =>
                 {
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
                     b.HasOne("MachineMaintenanceSystem.Api.Models.v1.MaintenanceRecord", "MaintenanceRecord")
                         .WithMany("PartsUsed")
                         .HasForeignKey("MaintenanceRecordId")
@@ -393,9 +612,32 @@ namespace MachineMaintenanceSystem.Api.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("CreatedBy");
+
                     b.Navigation("MaintenanceRecord");
 
                     b.Navigation("Part");
+
+                    b.Navigation("UpdatedBy");
+                });
+
+            modelBuilder.Entity("MachineMaintenanceSystem.Api.Models.v1.Technician", b =>
+                {
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
+                    b.HasOne("MachineMaintenanceSystem.Api.Models.v1.SystemUser", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("MachineMaintenanceSystem.Api.Models.v1.Equipment", b =>

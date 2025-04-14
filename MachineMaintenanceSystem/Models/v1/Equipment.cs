@@ -2,7 +2,7 @@
 
 namespace MachineMaintenanceSystem.Api.Models.v1
 {
-    public class Equipment
+    public class Equipment : BaseModel
     {
         [Key]
         public Guid Id { get; set; }
@@ -40,3 +40,4 @@ namespace MachineMaintenanceSystem.Api.Models.v1
         public ICollection<MaintenanceRecord> MaintenanceRecords { get; set; }
         public ICollection<MaintenanceSchedule> MaintenanceSchedules { get; set; }
     }
+}
