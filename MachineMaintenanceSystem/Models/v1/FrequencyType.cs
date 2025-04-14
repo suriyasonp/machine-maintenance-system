@@ -1,4 +1,4 @@
-﻿namespace MachineMaintenanceSystem.Api.Models
+﻿namespace MachineMaintenanceSystem.Api.Models.v1
 {
     public enum FrequencyType
     {

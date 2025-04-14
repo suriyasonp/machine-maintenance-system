@@ -1,4 +1,4 @@
-﻿using MachineMaintenanceSystem.Api.Models;
+﻿using MachineMaintenanceSystem.Api.Models.v1;
 using Microsoft.EntityFrameworkCore;
 
 namespace MachineMaintenanceSystem.Api.Data

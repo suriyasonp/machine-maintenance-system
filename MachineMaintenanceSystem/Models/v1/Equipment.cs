@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MachineMaintenanceSystem.Api.Models
+namespace MachineMaintenanceSystem.Api.Models.v1
 {
     public class Equipment
     {
         [Key]
-        public Guid id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(100)]

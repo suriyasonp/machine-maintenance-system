@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MachineMaintenanceSystem.Api.Models
+namespace MachineMaintenanceSystem.Api.Models.v1
 {
     public class Part
     {
