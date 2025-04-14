@@ -29,6 +29,8 @@ namespace MachineMaintenanceSystem.Api.Models
         [StringLength(500)]
         public string? Notes { get; set; }
 
+        public decimal Cost { get; set; }
+
         public bool IsEmergency { get; set; } = false;
 
         public bool IsCompleted { get; set; } = false;
