@@ -1,28 +1,30 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MachineMaintenanceSystem.Api.Models.v1
+namespace MachineMaintenanceSystem.Api.Dtos
 {
-    public class Part : BaseModel
+    public class BasePartDto
     {
-        [Key]
-        public Guid Id { get; set; }
-
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string PartNumber { get; set; }
 
         [StringLength(200)]
         public string Description { get; set; }
 
+        [Required]
+        [Range(0.01, 99999.99)]
         public decimal UnitPrice { get; set; }
 
         [Required]
+        [Range(0, int.MaxValue)]
         public int QuantityInStock { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue)]
         public int MinimumStockLevel { get; set; }
 
         [Required]
@@ -31,8 +33,18 @@ namespace MachineMaintenanceSystem.Api.Models.v1
 
         [StringLength(100)]
         public string Location { get; set; }
+    }
 
-        // Navigation properties
-        public ICollection<PartUsage> UsageRecords { get; set; }
+    public class PartDto : BasePartDto
+    {
+        public Guid Id { get; set; }
+    }
+
+    public class CreatePartDto : BasePartDto
+    {
+    }
+
+    public class UpdatePartDto : BasePartDto
+    {
     }
 }
