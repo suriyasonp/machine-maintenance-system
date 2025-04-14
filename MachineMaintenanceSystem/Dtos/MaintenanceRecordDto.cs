@@ -3,32 +3,46 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MachineMaintenanceSystem.Api.Dtos
 {
-    public abstract class MaintenanceRecordDto
+    public abstract class BaseMaintenanceRecordDto
     {
         [Required]
-        [StringLength(100)]
-        public string Name { get; set; }
+        public Guid EquipmentId { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string SerialNumber { get; set; }
+        public DateTime MaintenanceDate { get; set; }
 
+        [Required]
         [StringLength(200)]
         public string Description { get; set; }
 
         [Required]
-        public DateTimeOffset InstallationDate { get; set; }
+        public MaintenanceType Type { get; set; }
 
         [Required]
-        [StringLength(100)]
-        public string Manufacturer { get; set; }
+        public int TechnicianId { get; set; }
 
-        [StringLength(100)]
-        public string Model { get; set; }
+        [StringLength(500)]
+        public string Notes { get; set; }
 
-        [Required]
-        public EquipmentType Type { get; set; }
+        public bool IsEmergency { get; set; }
 
-        public string Location { get; set; }
+        public decimal? Cost { get; set; }
+    }
+
+    public class MaintenanceRecordDto : BaseMaintenanceRecordDto
+    {
+        public Guid Id { get; set; }
+        public string EquipmentName { get; set; }
+        public string TechnicianName { get; set; }
+        public IEnumerable<PartUsageDto> PartsUsed { get; set; }
+    }
+
+    public class CreateMaintenanceRecordDto : BaseMaintenanceRecordDto
+    {
+        public List<CreatePartUsageDto> PartsUsed { get; set; } = [];
+    }
+
+    public class UpdateMaintenanceRecordDto : BaseMaintenanceRecordDto
+    {
     }
 }
