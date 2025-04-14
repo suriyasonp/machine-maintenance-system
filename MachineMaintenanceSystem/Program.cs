@@ -1,11 +1,9 @@
 using Asp.Versioning;
-using Asp.Versioning.ApiExplorer;
 using HealthChecks.UI.Client;
 using MachineMaintenanceSystem.Api.Data;
 using MachineMaintenanceSystem.Api.Endpoints;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
 
 // Ensure the required NuGet package is installed:
 // Install-Package Asp.Versioning.ApiExplorer
